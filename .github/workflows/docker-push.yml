@@ -10,7 +10,7 @@ env:
   IMAGE_NAME: v2ray
 
 jobs:
-  build:
+  docker-push:
     runs-on: ubuntu-latest
     permissions:
       contents: read
