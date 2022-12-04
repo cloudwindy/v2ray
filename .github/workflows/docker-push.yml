@@ -62,6 +62,6 @@ jobs:
       - name: Trigger webhook
         id: webhook
         uses: distributhor/workflow-webhook@v3.0.1
-        with:
+        env:
           # The HTTP URI of the webhook endpoint to invoke
           webhook_url: ${{ secrets.WEBHOOK }}
