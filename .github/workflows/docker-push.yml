@@ -49,7 +49,6 @@ jobs:
       # Build and push Docker image with Buildx
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
-        id: build-and-push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -60,8 +59,5 @@ jobs:
       
       # Trigger webhook after push
       - name: Trigger webhook
-        id: webhook
-        uses: distributhor/workflow-webhook@v3.0.1
-        env:
-          # The HTTP URI of the webhook endpoint to invoke
-          webhook_url: ${{ secrets.WEBHOOK }}
+        run: |
+          curl -x POST ${{ secrets.WEBHOOK }}
