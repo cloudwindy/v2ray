@@ -3,19 +3,14 @@ LABEL maintainer "cloudwindy <skey@skc0.com>"
 
 WORKDIR /root
 
-ENV PYTHONUNBUFFERED="1" \
-    ALPINE_APK_SOURCE="mirrors.ustc.edu.cn" \
-    PYTHON_PIP_SOURCE="mirrors.aliyun.com"
+ENV PYTHONUNBUFFERED="1"
 
 RUN set -ex && \
-    echo "https://${ALPINE_APK_SOURCE}/alpine/v3.15/main" > /etc/apk/repositories && \
-    echo "https://${ALPINE_APK_SOURCE}/alpine/v3.15/community" >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \
     apk add --no-cache bash jq python3 tzdata openssl ca-certificates wget && \
     ln -sf python3 /usr/bin/python && \
     python3 -m ensurepip && \
-    pip3 config set global.index-url "https://${PYTHON_PIP_SOURCE}/pypi/simple" && \
     pip3 install --no-cache --upgrade pip setuptools && \
     pip3 install --no-cache yq && \
     mkdir -p /etc/v2ray /usr/local/share/v2ray /var/log/v2ray
