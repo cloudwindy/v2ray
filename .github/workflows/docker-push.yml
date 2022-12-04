@@ -3,6 +3,7 @@ name: Docker
 on:
   push:
     paths:
+      - 'Dockerfile'
       - 'v2ray-core-latest.txt'
 
 env:
