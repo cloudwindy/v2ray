@@ -25,4 +25,4 @@ RUN set -ex && \
     mv config.json /etc/v2ray/config.json && \
     rm -rf *
 
-CMD [ "/bin/bash", "-c", "yq . /etc/v2ray/config.yaml | v2ray" ]
+CMD [ "/bin/bash", "-c", "yq . /etc/v2ray/config.yaml | v2ray run" ]
