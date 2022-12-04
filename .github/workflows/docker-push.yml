@@ -60,4 +60,4 @@ jobs:
       # Trigger webhook after push
       - name: Trigger webhook
         run: |
-          curl -x POST ${{ secrets.WEBHOOK }}
+          curl -X POST ${{ secrets.WEBHOOK }}
