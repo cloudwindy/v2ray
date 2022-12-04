@@ -5,6 +5,7 @@ on:
     paths:
       - 'Dockerfile'
       - 'v2ray-core-latest.txt'
+  workflow_dispatch:
 
 env:
   # github.repository as <account>/<repo>
