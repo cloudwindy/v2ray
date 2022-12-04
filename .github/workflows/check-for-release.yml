@@ -1,0 +1,32 @@
+name: Check for new v2ray release
+
+on:
+  schedule:
+    - cron:  '0 10 * * *'
+
+env:
+  EMAIL: skey@skc0.com
+
+jobs:
+  check-for-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Fetch release version
+        run: |
+          curl -sL https://api.github.com/repos/v2fly/v2ray-core/releases/latest | \
+          jq -r ".tag_name" > v2ray-core-latest.txt
+
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+
+      - name: Commit latest release version
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '{{ env.EMAIL }}'
+          git commit -am "New version of v2ray is released"
+          git push
