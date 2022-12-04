@@ -1,19 +1,9 @@
 name: Docker
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 on:
-  schedule:
-    - cron: '18 3 * * *'
   push:
-    branches: [ "main" ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
-  pull_request:
-    branches: [ "main" ]
+    paths:
+      - 'v2ray-core-latest.txt'
 
 env:
   # github.repository as <account>/<repo>
@@ -39,8 +29,7 @@ jobs:
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
-      - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
+      - name: Log into registry ${{ secrets.REGISTRY }}
         uses: docker/login-action@v2
         with:
           registry: ${{ secrets.REGISTRY }}
