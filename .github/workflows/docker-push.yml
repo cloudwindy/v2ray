@@ -1,11 +1,11 @@
 name: Docker push
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'Dockerfile'
       - 'v2ray-core-latest.txt'
-  workflow_dispatch:
 
 env:
   # github.repository as <account>/<repo>
