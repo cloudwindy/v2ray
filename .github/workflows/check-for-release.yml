@@ -1,4 +1,4 @@
-name: Check for new v2ray release
+name: check for new v2ray release
 
 on:
   workflow_dispatch:
